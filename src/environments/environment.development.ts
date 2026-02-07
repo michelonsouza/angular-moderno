@@ -1,0 +1,5 @@
+export const environment = {
+  "production": false,
+  "NG_APP_NODE_ENV": "development",
+  "NG_APP_API_URL": "http://localhost:3000/api/"
+};
