@@ -1,7 +1,6 @@
+import type { TransactionType } from '@/app/shared/transaction/interfaces/transaction';
 import { Component, computed, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-
-type BalanceCardType = 'income' | 'outcome' | 'balance';
 
 type BalanceCardCssClass = 'income' | 'outcome' | 'zero';
 
@@ -12,7 +11,7 @@ type BalanceCardCssClass = 'income' | 'outcome' | 'zero';
   styleUrl: './balance-card.scss',
 })
 export class BalanceCard {
-  public readonly type = input.required<BalanceCardType>();
+  public readonly type = input.required<TransactionType>();
   public readonly label = input.required<string>();
   public readonly value = input.required<number>();
 
@@ -23,7 +22,7 @@ export class BalanceCard {
       return 'zero';
     }
 
-    const classes: Record<BalanceCardType, BalanceCardCssClass> = {
+    const classes: Record<TransactionType, BalanceCardCssClass> = {
       income: 'income',
       outcome: 'outcome',
       balance: balanceClass,

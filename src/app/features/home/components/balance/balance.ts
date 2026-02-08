@@ -1,12 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { BalanceCard } from './components/balance-card/balance-card';
-
-type TransactioType = 'income' | 'outcome';
-
-export interface TransactionType {
-  value: number;
-  type: TransactioType;
-}
+import type { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 @Component({
   selector: 'app-balance',
   imports: [BalanceCard],
@@ -14,7 +8,7 @@ export interface TransactionType {
   styleUrl: './balance.scss',
 })
 export class Balance {
-  public transactions = input.required<TransactionType[]>();
+  public transactions = input.required<Transaction[]>();
 
   protected readonly totalIncomes = computed(() => {
     return this.transactions()
