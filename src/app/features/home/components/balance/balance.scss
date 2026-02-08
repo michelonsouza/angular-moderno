@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+
+  @media (max-width: 720px) {
+    flex-direction: column;
+  }
+
+  .card {
+    flex: 1;
+  }
+}
