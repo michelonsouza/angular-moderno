@@ -9,6 +9,9 @@ import { TransactionValue } from './components/transaction-value/transaction-val
   imports: [MatCardModule, MatButtonModule, TransactionValue],
   templateUrl: './transaction-item.html',
   styleUrl: './transaction-item.scss',
+  host: {
+    '[attr.data-transaction]': 'transaction().id',
+  },
 })
 export class TransactionItem {
   public readonly transaction = input.required<Transaction>();

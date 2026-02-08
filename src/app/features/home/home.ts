@@ -1,7 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+
+import type { Transaction } from '@/app/shared/transaction/interfaces/transaction';
+import { TransactionsService } from '@/app/shared/transaction/services/transactions';
+
 import { Balance } from './components/balance/balance';
 import { TransactionItem } from './components/transaction-item/transaction-item';
-import type { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 import { NoTransactions } from './components/no-transactions/no-transactions';
 
 @Component({
@@ -10,11 +13,22 @@ import { NoTransactions } from './components/no-transactions/no-transactions';
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home {
-  public readonly transactions = signal<Transaction[]>([
-    { value: 100, type: 'income', title: 'Salário' },
-    { value: 50, type: 'income', title: 'Freelance' },
-    { value: 50, type: 'outcome', title: 'Lanche' },
-    { value: 100, type: 'outcome', title: 'Aluguel' },
-  ]);
+export class Home implements OnInit {
+  readonly #transactionsService = inject(TransactionsService);
+
+  public readonly transactions = signal<Transaction[]>([]);
+
+  ngOnInit(): void {
+    this.#getTransactions();
+  }
+
+  #getTransactions() {
+    this.#transactionsService.getAll().subscribe({
+      next: transactions => {
+        this.transactions.set(transactions);
+      },
+    });
+  }
 }
+
+console.log({ Home });
