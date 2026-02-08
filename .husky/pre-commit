@@ -1,1 +1,1 @@
-npm test
+yarn precommit && yarn type:check
