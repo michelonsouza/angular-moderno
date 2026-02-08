@@ -10,6 +10,11 @@
 // Component overrides
 @use 'styles/overrides/toolbar';
 
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 html {
   @include mat.theme((color: (primary: theme-colors.$primary-palette,
         tertiary: theme-colors.$tertiary-palette,
