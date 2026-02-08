@@ -12,9 +12,9 @@ import { NoTransactions } from './components/no-transactions/no-transactions';
 })
 export class Home {
   public readonly transactions = signal<Transaction[]>([
-    // { value: 100, type: 'income', title: 'Salário' },
-    // { value: 50, type: 'income', title: 'Freelance' },
-    // { value: 50, type: 'outcome', title: 'Lanche' },
-    // { value: 100, type: 'outcome', title: 'Aluguel' },
+    { value: 100, type: 'income', title: 'Salário' },
+    { value: 50, type: 'income', title: 'Freelance' },
+    { value: 50, type: 'outcome', title: 'Lanche' },
+    { value: 100, type: 'outcome', title: 'Aluguel' },
   ]);
 }

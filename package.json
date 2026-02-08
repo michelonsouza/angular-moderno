@@ -2,7 +2,8 @@
   "name": "gerenciador-financeiro",
   "version": "0.0.0",
   "scripts": {
-    "start": "ng serve --open",
+    "start": "run-p start:*",
+    "start:app": "ng serve --open",
     "prestart": "node scripts/generate-envs.mjs",
     "build": "ng build",
     "prebuild": "node scripts/generate-envs.mjs",
@@ -12,7 +13,8 @@
     "lint:fix": "yarn lint --fix",
     "precommit": "lint-staged",
     "type:check": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "start:server": "json-server db.json --watch --delay 500 --port 3333"
   },
   "lint-staged": {
     "*.{ts,js,tsx,jsx}": [
@@ -49,12 +51,14 @@
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
     "jasmine-core": "~5.9.0",
+    "json-server": "0.17.4",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "lint-staged": "^16.2.7",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.8.1",
     "typescript": "~5.9.2",
     "typescript-eslint": "8.46.4"

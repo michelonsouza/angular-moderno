@@ -1,0 +1,28 @@
+{
+  "transactions": [
+    {
+      "id": "019c3e72-4fd2-7826-98bd-b80228e1bda5",
+      "value": 100,
+      "type": "income",
+      "title": "Salário"
+    },
+    {
+      "id": "019c3e72-95d4-761d-b119-684331c9ef67",
+      "value": 50,
+      "type": "income",
+      "title": "Freelance"
+    },
+    {
+      "id": "019c3e72-b0e1-7f63-83e3-b22194fb4acb",
+      "value": 50,
+      "type": "outcome",
+      "title": "Lanche"
+    },
+    {
+      "id": "019c3e72-ca7a-73bf-b596-987abdd3b495",
+      "value": 100,
+      "type": "outcome",
+      "title": "Aluguel"
+    }
+  ]
+}
