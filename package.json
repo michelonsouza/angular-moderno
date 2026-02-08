@@ -8,8 +8,8 @@
     "prebuild": "node scripts/generate-envs.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false",
-    "lint": "ng lint",
-    "lint:fix": "ng lint --fix",
+    "lint": "npx eslint --ext js,ts,html --max-warnings 0 --config eslint.config.js",
+    "lint:fix": "yarn lint --fix",
     "precommit": "lint-staged",
     "type:check": "tsc --noEmit",
     "prepare": "husky"
