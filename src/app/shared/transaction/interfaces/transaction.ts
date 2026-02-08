@@ -1,7 +1,8 @@
 export type TransactionType = 'income' | 'outcome' | 'balance';
 
 export interface Transaction {
+  id: string;
   title: string;
-  type: TransactionType;
   value: number;
+  type: TransactionType;
 }
