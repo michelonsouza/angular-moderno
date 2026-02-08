@@ -3,7 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 
 type BalanceCardType = 'income' | 'outcome' | 'balance';
 
-type BalanceCardCssClass = 'income' | 'outcome';
+type BalanceCardCssClass = 'income' | 'outcome' | 'zero';
 
 @Component({
   selector: 'app-balance-card',
@@ -17,10 +17,16 @@ export class BalanceCard {
   public readonly value = input.required<number>();
 
   protected readonly cssClass = computed<BalanceCardCssClass>(() => {
+    const balanceClass = this.value() > 0 ? 'income' : 'outcome';
+
+    if (this.value() === 0) {
+      return 'zero';
+    }
+
     const classes: Record<BalanceCardType, BalanceCardCssClass> = {
       income: 'income',
       outcome: 'outcome',
-      balance: this.value() > 0 ? 'income' : 'outcome',
+      balance: balanceClass,
     };
 
     return classes[this.type()];
