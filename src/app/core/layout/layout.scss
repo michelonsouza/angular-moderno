@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
+
+  .container-content {
+    width: 100%;
+    max-width: 720px;
+
+    @media (max-width: 720px) {
+      padding: 0 24px;
+    }
+  }
+}
