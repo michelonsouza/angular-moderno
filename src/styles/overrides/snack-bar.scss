@@ -10,9 +10,9 @@
   }
 
   .snack-bar-error-feedback {
-    @include mat.snack-bar-overrides((button-color: var(--mat-sys-on-primary),
-        supporting-text-color: var(--mat-sys-on-primary),
-        container-color: var(--custom-color-error),
+    @include mat.snack-bar-overrides((button-color: var(--mat-sys-on-error),
+        supporting-text-color: var(--mat-sys-on-error),
+        container-color: var(--mat-sys-error),
       ));
   }
 }

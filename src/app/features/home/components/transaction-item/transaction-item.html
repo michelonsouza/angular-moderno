@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="card-actions">
-    <button matButton="tonal" (click)="remove.emit(transaction())">Remover</button>
+    <button class="btn-error" matButton="filled" (click)="remove.emit(transaction())">Remover</button>
     <button matButton="filled" (click)="edit.emit(transaction())">Editar</button>
   </div>
 </mat-card>

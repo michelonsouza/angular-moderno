@@ -8,8 +8,9 @@
 @use 'styles/custom-colors';
 
 // Component overrides
-@use 'styles/overrides/toolbar';
+@use 'styles/overrides/button';
 @use 'styles/overrides/snack-bar';
+@use 'styles/overrides/toolbar';
 
 * {
   -webkit-font-smoothing: antialiased;
