@@ -7,6 +7,9 @@ const prettier = require('eslint-config-prettier');
 
 module.exports = defineConfig(
   {
+    ignores: ['**/.angular/**'],
+  },
+  {
     files: ['**/*.ts'],
     extends: [
       eslint.configs.recommended,
@@ -16,7 +19,6 @@ module.exports = defineConfig(
       prettier,
     ],
     processor: angular.processInlineTemplates,
-    ignores: ['.angular/*'],
     rules: {
       semi: ['error', 'always'],
       '@typescript-eslint/no-unused-vars': [

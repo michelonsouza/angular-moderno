@@ -8,6 +8,8 @@ import { Balance } from './components/balance/balance';
 import { TransactionItem } from './components/transaction-item/transaction-item';
 import { NoTransactions } from './components/no-transactions/no-transactions';
 import { Router, RouterLink } from '@angular/router';
+import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
+import { ConfirmationDialogService } from '@/app/shared/dialog/confirmation/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-home',
@@ -16,8 +18,10 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './home.scss',
 })
 export class Home implements OnInit {
+  readonly #feedbackService = inject(FeedbackService);
   readonly #transactionsService = inject(TransactionsService);
   readonly #router = inject(Router);
+  readonly #confirmationDialogService = inject(ConfirmationDialogService);
 
   public readonly transactions = signal<Transaction[]>([]);
 
@@ -27,6 +31,38 @@ export class Home implements OnInit {
 
   edit(transaction: Transaction) {
     this.#router.navigate(['edit', transaction.id]);
+  }
+  remove(transaction: Transaction) {
+    this.#confirmationDialogService
+      .open({
+        title: 'Deletar transação',
+        message: `Você realmenmte quer deletar a transação ${transaction.title}?`,
+      })
+      .subscribe({
+        next: () => {
+          this.#transactionsService.deleteById(transaction.id).subscribe({
+            next: () => {
+              this.#removeLocalTransaction(transaction);
+              this.#feedbackService.success(
+                `Transação ${transaction.title} removida com sucesso`,
+                'Fechar',
+              );
+            },
+            error: () => {
+              this.#feedbackService.error(
+                `Erro ao remover transação ${transaction.title}`,
+                'Fechar',
+              );
+            },
+          });
+        },
+      });
+  }
+
+  #removeLocalTransaction(transaction: Transaction) {
+    this.transactions.update(prev =>
+      prev.filter(prevTransaction => prevTransaction.id !== transaction.id),
+    );
   }
 
   #getTransactions() {

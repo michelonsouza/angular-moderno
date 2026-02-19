@@ -17,4 +17,6 @@ export class TransactionItem {
   public readonly transaction = input.required<Transaction>();
 
   public edit = output<Transaction>();
+
+  public remove = output<Transaction>();
 }
