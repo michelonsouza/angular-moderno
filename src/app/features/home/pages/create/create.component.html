@@ -1,0 +1,42 @@
+<form [formGroup]="form" class="form" (ngSubmit)="submit()">
+  <mat-button-toggle-group formControlName="type" name="type" aria-label="transaction type" class="toggle-type">
+    <mat-button-toggle value="outcome">Gasto</mat-button-toggle>
+    <mat-button-toggle value="income">Ganho</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Título</mat-label>
+    <input matInput placeholder="Digite o título da transação" formControlName="title" name="title" required />
+
+    @if (form.controls.title.hasError('required')) {
+    <mat-error>Campo obrigatório</mat-error>
+    }
+    @if (form.controls.title.hasError('minlength')) {
+    <mat-error>
+      Campo deve conter, no mínimo, {{ form.controls.title.errors?.['minlength']?.['requiredLength'] }}
+      caracteres
+    </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Valor</mat-label>
+    <span matTextPrefix>R$&nbsp;</span>
+    <input type="text" matInput placeholder="Digite o valor da transação" formControlName="value" name="value"
+      mask="separator.2" [required]="true" />
+
+    @if (form.controls.title.hasError('required')) {
+    <mat-error>Campo obrigatório</mat-error>
+    }
+    @if (form.controls.title.hasError('minlength')) {
+    <mat-error>
+      Campo deve conter, no mínimo, {{ form.controls.title.errors?.['minlength']?.['requiredLength'] }}
+      caracteres
+    </mat-error>
+    }
+  </mat-form-field>
+
+  <div class="submit-container">
+    <button class="submit-button" matButton="filled" [disabled]="form.invalid">Salvar</button>
+  </div>
+</form>

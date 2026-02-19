@@ -1,28 +1,34 @@
 {
   "transactions": [
     {
-      "id": "019c3e72-4fd2-7826-98bd-b80228e1bda5",
+      "id": "733ef7d6-7590-8a7f-97af-321f1f2f",
+      "title": "Comprei uma coxinha",
+      "value": 5,
+      "type": "outcome"
+    },
+    {
+      "id": "73413792-7e34-b650-5a18-c445355a",
+      "title": "Ganhei um pix",
       "value": 100,
-      "type": "income",
-      "title": "Salário"
+      "type": "income"
     },
     {
-      "id": "019c3e72-95d4-761d-b119-684331c9ef67",
+      "id": "73464015-7393-9740-75c9-7da3152f",
+      "title": "Mais um pix",
+      "value": 1000,
+      "type": "income"
+    },
+    {
+      "id": "7348624a-7778-ae35-6113-e46291c8",
+      "title": "Teste pix",
       "value": 50,
-      "type": "income",
-      "title": "Freelance"
+      "type": "income"
     },
     {
-      "id": "019c3e72-b0e1-7f63-83e3-b22194fb4acb",
-      "value": 50,
-      "type": "outcome",
-      "title": "Lanche"
-    },
-    {
-      "id": "019c3e72-ca7a-73bf-b596-987abdd3b495",
-      "value": 100,
-      "type": "outcome",
-      "title": "Aluguel"
+      "id": "735228d4-7dac-8003-7c22-ac357252",
+      "title": "Merecido",
+      "value": 1000,
+      "type": "income"
     }
   ]
 }
