@@ -7,7 +7,7 @@ import { TransactionsService } from '@/app/shared/transaction/services/transacti
 import { Balance } from './components/balance/balance';
 import { TransactionItem } from './components/transaction-item/transaction-item';
 import { NoTransactions } from './components/no-transactions/no-transactions';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,11 +17,16 @@ import { RouterLink } from '@angular/router';
 })
 export class Home implements OnInit {
   readonly #transactionsService = inject(TransactionsService);
+  readonly #router = inject(Router);
 
   public readonly transactions = signal<Transaction[]>([]);
 
   ngOnInit(): void {
     this.#getTransactions();
+  }
+
+  edit(transaction: Transaction) {
+    this.#router.navigate(['edit', transaction.id]);
   }
 
   #getTransactions() {

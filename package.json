@@ -5,7 +5,7 @@
     "start": "run-p start:*",
     "start:app": "ng serve --open",
     "start:server": "json-server db.json --watch --delay 500 --port 3333",
-    "prestart": "node scripts/generate-envs.mjs",
+    "env:generate": "node scripts/generate-envs.mjs",
     "build": "ng build",
     "prebuild": "node scripts/generate-envs.mjs",
     "watch": "ng build --watch --configuration development",

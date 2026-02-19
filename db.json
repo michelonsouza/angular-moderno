@@ -1,34 +1,20 @@
 {
   "transactions": [
     {
-      "id": "733ef7d6-7590-8a7f-97af-321f1f2f",
-      "title": "Comprei uma coxinha",
-      "value": 5,
-      "type": "outcome"
+      "title": "Salário",
+      "value": 1115.23,
+      "type": "income",
+      "createdAt": "2026-02-19T01:53:31.004Z",
+      "updatedAt": "2026-02-19T03:05:56.126Z",
+      "id": "739a317c-7b2c-82e7-2924-a487648f"
     },
     {
-      "id": "73413792-7e34-b650-5a18-c445355a",
-      "title": "Ganhei um pix",
-      "value": 100,
-      "type": "income"
-    },
-    {
-      "id": "73464015-7393-9740-75c9-7da3152f",
-      "title": "Mais um pix",
-      "value": 1000,
-      "type": "income"
-    },
-    {
-      "id": "7348624a-7778-ae35-6113-e46291c8",
-      "title": "Teste pix",
+      "id": "73dd80d7-78fa-899d-b545-b3b60e83",
+      "title": "Coxinha na Graal",
       "value": 50,
-      "type": "income"
-    },
-    {
-      "id": "735228d4-7dac-8003-7c22-ac357252",
-      "title": "Merecido",
-      "value": 1000,
-      "type": "income"
+      "type": "outcome",
+      "createdAt": "2026-02-19T03:07:02.231Z",
+      "updatedAt": "2026-02-19T03:07:02.231Z"
     }
   ]
 }

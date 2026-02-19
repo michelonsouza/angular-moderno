@@ -9,6 +9,6 @@
   </div>
   <div class="card-actions">
     <button matButton="tonal">Remover</button>
-    <button matButton="filled">Editar</button>
+    <button matButton="filled" (click)="edit.emit(transaction())">Editar</button>
   </div>
 </mat-card>

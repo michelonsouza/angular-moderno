@@ -17,17 +17,27 @@ export class TransactionsService {
     return this.#httpClient.get<Transaction[]>(BASE_URL);
   }
 
+  public getById(id: string) {
+    return this.#httpClient.get<Transaction>(`${BASE_URL}/${id}`);
+  }
+
   public create(data: TransactionPayload) {
-    const parsedData: Transaction = {
+    const now = new Date();
+    const parsedData = {
       id: uuid(),
       ...data,
-    };
+      createdAt: now,
+      updatedAt: now,
+    } as Transaction;
 
     return this.#httpClient.post<Transaction>(BASE_URL, parsedData);
   }
 
   public updateById(id: string, data: Partial<TransactionPayload>) {
-    return this.#httpClient.patch<Transaction>(`${BASE_URL}/${id}`, data);
+    return this.#httpClient.put<Transaction>(`${BASE_URL}/${id}`, {
+      ...data,
+      updatedAt: new Date(),
+    });
   }
 
   public deleteById(id: string) {
