@@ -1,23 +1,31 @@
 import { MatButtonModule } from '@angular/material/button';
-import { Component, inject, OnInit, signal } from '@angular/core';
-
-import type { Transaction } from '@/app/shared/transaction/interfaces/transaction';
-import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
-
-import { Balance } from './components/balance/balance';
-import { TransactionItem } from './components/transaction-item/transaction-item';
-import { NoTransactions } from './components/no-transactions/no-transactions';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
+
 import { ConfirmationDialogService } from '@/app/shared/dialog/confirmation/services/confirmation-dialog.service';
+import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
+import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
+import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
+import { Balance } from './components/balance/balance';
+import { NoTransactions } from './components/no-transactions/no-transactions';
+import { TransactionItem } from './components/transaction-item/transaction-item';
+import { TransactionsContainerComponent } from './components/transactions-container/transactions-container.component';
 
 @Component({
-  selector: 'app-home',
-  imports: [Balance, TransactionItem, NoTransactions, MatButtonModule, RouterLink],
-  templateUrl: './home.html',
-  styleUrl: './home.scss',
+  selector: 'app-list',
+  imports: [
+    Balance,
+    TransactionItem,
+    NoTransactions,
+    MatButtonModule,
+    RouterLink,
+    TransactionsContainerComponent,
+    TransactionsContainerComponent,
+  ],
+  templateUrl: './list.component.html',
+  styleUrl: './list.component.scss',
 })
-export class Home implements OnInit {
+export class ListComponent implements OnInit {
   readonly #feedbackService = inject(FeedbackService);
   readonly #transactionsService = inject(TransactionsService);
   readonly #router = inject(Router);

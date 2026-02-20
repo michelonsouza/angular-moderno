@@ -5,7 +5,7 @@ import { getTransacionByIdResolver } from './pages/create-or-edit/resolvers/get-
 const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./home').then(m => m.Home),
+    loadComponent: () => import('./pages/list/list.component').then(m => m.ListComponent),
   },
   {
     path: 'create',
