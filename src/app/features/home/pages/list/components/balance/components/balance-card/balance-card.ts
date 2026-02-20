@@ -1,4 +1,4 @@
-import type { TransactionType } from '@/app/shared/transaction/interfaces/transaction';
+import type { TransactionType } from '@shared/transaction/interfaces/transaction';
 import { Component, computed, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 

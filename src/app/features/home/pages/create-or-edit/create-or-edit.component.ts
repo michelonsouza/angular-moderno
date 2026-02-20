@@ -5,14 +5,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAnchor, MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NgxMaskDirective } from 'ngx-mask';
-import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
+import { TransactionsService } from '@shared/transaction/services/transactions.service';
 import {
   Transaction,
   TransactionPayload,
   TransactionType,
-} from '@/app/shared/transaction/interfaces/transaction';
+} from '@shared/transaction/interfaces/transaction';
 import { Router } from '@angular/router';
-import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
+import { FeedbackService } from '@shared/feedback/services/feedback.service';
 import { tap } from 'rxjs';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import type { Transaction } from '@/app/shared/transaction/interfaces/transaction';
+import type { Transaction } from '@shared/transaction/interfaces/transaction';
 import { TransactionValue } from './components/transaction-value/transaction-value';
 
 @Component({

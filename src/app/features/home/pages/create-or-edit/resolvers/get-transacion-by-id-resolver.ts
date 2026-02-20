@@ -1,7 +1,8 @@
-import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
-import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
+
+import { Transaction } from '@shared/transaction/interfaces/transaction';
+import { TransactionsService } from '@shared/transaction/services/transactions.service';
 
 export const getTransacionByIdResolver: ResolveFn<Transaction> = (route, _state) => {
   const transactionService = inject(TransactionsService);

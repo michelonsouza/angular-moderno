@@ -1,4 +1,4 @@
-import { Transaction, TransactionType } from '@/app/shared/transaction/interfaces/transaction';
+import { Transaction, TransactionType } from '@shared/transaction/interfaces/transaction';
 import { Component, computed, input } from '@angular/core';
 
 const classes: Record<TransactionType, string> = {
