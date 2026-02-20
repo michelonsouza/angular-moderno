@@ -3,8 +3,9 @@ import { inject, Injectable } from '@angular/core';
 import { Transaction, TransactionPayload } from '../interfaces/transaction';
 
 import { uuid } from '@core/utils/uuid';
+import { environment } from '@/environments/environment.development';
 
-const BASE_URL = `/api/transactions`;
+const BASE_URL = `${environment.NG_APP_API_URL}/transactions`;
 
 @Injectable({
   providedIn: 'root',
