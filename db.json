@@ -9,20 +9,20 @@
       "updatedAt": "2026-02-19T04:18:49.399Z"
     },
     {
-      "id": "741f7289-7199-ae67-a672-b4ef12b7",
-      "title": "Coxinha na Graal",
-      "value": 50.55,
-      "type": "outcome",
-      "createdAt": "2026-02-19T04:19:03.945Z",
-      "updatedAt": "2026-02-19T04:19:03.945Z"
-    },
-    {
       "id": "741fa142-71c6-bb7c-a40e-79108a18",
       "title": "Internet",
       "value": 239.77,
       "type": "outcome",
       "createdAt": "2026-02-19T04:19:15.906Z",
       "updatedAt": "2026-02-19T04:19:15.906Z"
+    },
+    {
+      "id": "797a0b0f-72dd-8466-548b-0ed20bcf",
+      "title": "Coxinha da Graal",
+      "value": 50.55,
+      "type": "outcome",
+      "createdAt": "2026-02-20T05:16:07.311Z",
+      "updatedAt": "2026-02-20T05:16:07.311Z"
     }
   ]
 }

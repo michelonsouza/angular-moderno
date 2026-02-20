@@ -5,13 +5,14 @@
     "start": "run-p start:*",
     "start:app": "ng serve --open",
     "start:server": "json-server db.json --watch --delay 500 --port 3333",
-    "env:generate": "node scripts/generate-envs.mjs",
+    "prestart": "node scripts/generate-envs.mjs",
     "build": "ng build",
     "prebuild": "node scripts/generate-envs.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false",
     "lint": "npx eslint --ext js,ts,html --max-warnings 0 --config eslint.config.js",
     "lint:fix": "yarn lint --fix",
+    "pretty": "prettier \"./src/**/*.{ts,js,html,css,scss}\" --write",
     "precommit": "lint-staged",
     "type:check": "tsc --noEmit",
     "prepare": "husky"
@@ -20,7 +21,9 @@
     "*.{ts,js,tsx,jsx}": [
       "yarn lint:fix"
     ],
-    "*.{js,jsx,tsx,ts,json,css,md}": "prettier --write"
+    "*.{js,jsx,tsx,ts,json,css,md}": [
+      "prettier --write"
+    ]
   },
   "private": true,
   "dependencies": {

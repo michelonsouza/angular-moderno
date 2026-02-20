@@ -33,4 +33,4 @@ fs.writeFileSync(developEnvPath, `export const environment = ${JSON.stringify(de
   encoding: 'utf-8',
 });
 
-execSync('yarn lint:fix');
+execSync('prettier --write "./src/environments/*.ts"', { stdio: 'inherit' });

@@ -1,5 +1,5 @@
 import { MatButtonModule } from '@angular/material/button';
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, input, linkedSignal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 import { ConfirmationDialogService } from '@/app/shared/dialog/confirmation/services/confirmation-dialog.service';
@@ -25,17 +25,15 @@ import { TransactionsContainerComponent } from './components/transactions-contai
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
   readonly #feedbackService = inject(FeedbackService);
   readonly #transactionsService = inject(TransactionsService);
   readonly #router = inject(Router);
   readonly #confirmationDialogService = inject(ConfirmationDialogService);
 
-  public readonly transactions = signal<Transaction[]>([]);
+  public readonly initalTransactions = input.required<Transaction[]>();
 
-  ngOnInit(): void {
-    this.#getTransactions();
-  }
+  protected readonly transactions = linkedSignal(() => this.initalTransactions());
 
   edit(transaction: Transaction) {
     this.#router.navigate(['edit', transaction.id]);
@@ -71,13 +69,5 @@ export class ListComponent implements OnInit {
     this.transactions.update(prev =>
       prev.filter(prevTransaction => prevTransaction.id !== transaction.id),
     );
-  }
-
-  #getTransactions() {
-    this.#transactionsService.getAll().subscribe({
-      next: transactions => {
-        this.transactions.set(transactions);
-      },
-    });
   }
 }
