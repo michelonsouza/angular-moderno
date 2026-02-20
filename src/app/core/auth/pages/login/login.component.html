@@ -1,0 +1,54 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form" class="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>E-mail</mat-label>
+        <input
+          matInput
+          placeholder="Digite seu e-mail"
+          formControlName="email"
+          name="email"
+          required
+        />
+
+        @if (form.controls.email.hasError('required')) {
+          <mat-error>E-mail obrigatório</mat-error>
+        }
+        @if (form.controls.email.hasError('email')) {
+          <mat-error>Digite um e-mail válido</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Senha</mat-label>
+        <input
+          matInput
+          placeholder="Digite sua senha"
+          formControlName="password"
+          name="password"
+          [type]="hidePassword() ? 'password' : 'text'"
+          required
+        />
+        <button
+          type="button"
+          matIconButton
+          matSuffix
+          [attr.aria-label]="ariaLabel()"
+          [attr.aria-pressed]="hidePassword()"
+          (click)="toggleHidePassword($event)"
+        >
+          <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+
+        @if (form.controls.password.hasError('required')) {
+          <mat-error>Senha é obrigatória</mat-error>
+        }
+      </mat-form-field>
+
+      <div class="submit-container">
+        <button type="submit" class="submit-button" matButton="filled" [disabled]="form.invalid">
+          Entrar
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

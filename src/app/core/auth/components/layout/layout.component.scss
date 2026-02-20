@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+
+  @media (max-width: 720px) {
+    padding: 24px;
+  }
+
+  .container-content {
+    width: 720px;
+    max-width: 100%;
+
+    @media (max-width: 720px) {
+      width: 100%;
+    }
+  }
+}
