@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { from, Observable, of, switchMap, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { createToken } from '../utils/jwt';
+import { createToken, verifyAndDecodeToken } from '../utils/jwt';
 
 import { AuthTokenResponse } from '../interfaces/auth-token-response';
 import { UserCredentials } from '../interfaces/user-credentials';
+import { User } from '../interfaces/user';
 
 const mockedUser = {
   email: 'email@email.com',
@@ -30,6 +31,23 @@ export class AuthService {
           statusText: 'Unauthorized',
           error: 'Invalid credentials',
         }),
+    );
+  }
+
+  public getCurrentUser(token: string): Observable<User | null> {
+    return from(verifyAndDecodeToken<{ email: string }>(token)).pipe(
+      switchMap(payload => {
+        if (!payload?.email) {
+          return of(null);
+        }
+
+        const user: User = {
+          name: 'John Doe',
+          email: payload?.email,
+        };
+
+        return of(user);
+      }),
     );
   }
 }

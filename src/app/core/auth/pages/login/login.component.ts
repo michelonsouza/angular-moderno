@@ -11,6 +11,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '@core/auth/services/auth.service';
 import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
 import { UserCredentials } from '@core/auth/interfaces/user-credentials';
+import { AuthTokenStorageService } from '../../services/auth-token-storage.service';
+import { LoggedInUserStoreService } from '../../stores/logged-in-user-store.service';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +33,8 @@ import { UserCredentials } from '@core/auth/interfaces/user-credentials';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  readonly #loggedInUserStoreService = inject(LoggedInUserStoreService);
+  readonly #authTokenStorageService = inject(AuthTokenStorageService);
   readonly #feebackService = inject(FeedbackService);
   readonly #authService = inject(AuthService);
   readonly #router = inject(Router);
@@ -59,20 +64,28 @@ export class LoginComponent {
 
     const response = await this.#authService.login(payload);
 
-    response.subscribe({
-      next: ({ token: _ }) => {
-        this.#router.navigate(['/']);
-      },
-      error: (response: HttpErrorResponse) => {
-        if (response.status === 401) {
-          this.form.setErrors({ wrongCredentials: true });
+    response
+      .pipe(
+        tap(({ token }) => this.#authTokenStorageService.set(token)),
+        switchMap(({ token }) => this.#authService.getCurrentUser(token)),
+        tap(user => this.#loggedInUserStoreService.setUser(user)),
+      )
+      .subscribe({
+        next: () => {
+          this.#router.navigate(['/']);
+        },
+        error: (response: HttpErrorResponse) => {
+          this.#authTokenStorageService.remove();
 
-          return;
-        }
+          if (response.status === 401) {
+            this.form.setErrors({ wrongCredentials: true });
 
-        this.#feebackService.error('Erro ao realizar login.', 'Fechar');
-      },
-    });
+            return;
+          }
+
+          this.#feebackService.error('Erro ao realizar login.', 'Fechar');
+        },
+      });
   }
 
   public toggleHidePassword(event: MouseEvent) {

@@ -4,6 +4,7 @@ const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
 const SECRET = environment.NG_APP_JWT_SECRET;
+const DEFAULT_EXP = 60 * 60 * 24 * 7; // 7 days
 
 // 🔹 Base64Url encode
 function base64UrlEncode(input: Uint8Array): string {
@@ -40,7 +41,10 @@ async function getKey() {
 }
 
 // 🔐 Criar Token
-export async function createToken(payload: object, expiresInSeconds = 3600): Promise<string> {
+export async function createToken(
+  payload: object,
+  expiresInSeconds = DEFAULT_EXP,
+): Promise<string> {
   const header = {
     alg: 'HS256',
     typ: 'JWT',
@@ -87,19 +91,19 @@ export async function verifyAndDecodeToken<T>(token: string): Promise<T | null> 
     );
 
     if (!isValid) {
-      throw new Error('Assinatura inválida');
+      throw new Error('invalid signature');
     }
 
     const payload = JSON.parse(decoder.decode(base64UrlDecode(encodedPayload)));
 
     const now = Math.floor(Date.now() / 1000);
     if (payload.exp && now > payload.exp) {
-      throw new Error('Token expirado');
+      throw new Error('expired token');
     }
 
     return payload as T;
   } catch (error) {
-    console.error('Token inválido:', error);
+    console.error('JWT:', error);
     return null;
   }
 }
