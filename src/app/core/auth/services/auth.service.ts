@@ -17,25 +17,29 @@ const mockedUser = {
   providedIn: 'root',
 })
 export class AuthService {
-  public async login(payload: UserCredentials): Promise<Observable<AuthTokenResponse>> {
-    if (payload.email === mockedUser.email && payload.password === mockedUser.password) {
-      const token = await createToken({ email: payload.email });
-
-      return of({ token });
+  public login(payload: UserCredentials): Observable<AuthTokenResponse> {
+    if (payload.email !== mockedUser.email || payload.password !== mockedUser.password) {
+      return throwError(
+        () =>
+          new HttpErrorResponse({
+            status: 401,
+            statusText: 'Unauthorized',
+            error: 'Invalid credentials',
+          }),
+      );
     }
 
-    return throwError(
-      () =>
-        new HttpErrorResponse({
-          status: 401,
-          statusText: 'Unauthorized',
-          error: 'Invalid credentials',
-        }),
+    return from(createToken({ email: payload.email })).pipe(
+      switchMap(token => of({ token } as AuthTokenResponse)),
     );
   }
 
+  public logout() {
+    return of({});
+  }
+
   public getCurrentUser(token: string): Observable<User | null> {
-    return from(verifyAndDecodeToken<{ email: string }>(token)).pipe(
+    return from(verifyAndDecodeToken(token)).pipe(
       switchMap(payload => {
         if (!payload?.email) {
           return of(null);
@@ -47,6 +51,20 @@ export class AuthService {
         };
 
         return of(user);
+      }),
+    );
+  }
+
+  public refreshToken(token: string) {
+    return from(verifyAndDecodeToken(token)).pipe(
+      switchMap(payload => {
+        if (!payload?.email) {
+          return of(null);
+        }
+
+        return from(createToken({ email: payload?.email })).pipe(
+          switchMap(newToken => of({ token: newToken } as AuthTokenResponse)),
+        );
       }),
     );
   }

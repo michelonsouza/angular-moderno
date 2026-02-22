@@ -8,12 +8,10 @@ import { MatCard, MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { AuthService } from '@core/auth/services/auth.service';
 import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
 import { UserCredentials } from '@core/auth/interfaces/user-credentials';
 import { AuthTokenStorageService } from '../../services/auth-token-storage.service';
-import { LoggedInUserStoreService } from '../../stores/logged-in-user-store.service';
-import { switchMap, tap } from 'rxjs';
+import { LoginFacadeService } from '../../facades/login-facade.service';
 
 @Component({
   selector: 'app-login',
@@ -33,11 +31,11 @@ import { switchMap, tap } from 'rxjs';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  readonly #loggedInUserStoreService = inject(LoggedInUserStoreService);
   readonly #authTokenStorageService = inject(AuthTokenStorageService);
   readonly #feebackService = inject(FeedbackService);
-  readonly #authService = inject(AuthService);
   readonly #router = inject(Router);
+  readonly #loginFacadeService = inject(LoginFacadeService);
+
   protected readonly hidePassword = signal<boolean>(true);
 
   protected readonly ariaLabel = computed(
@@ -55,37 +53,29 @@ export class LoginComponent {
     }),
   });
 
-  public async submit() {
+  public submit() {
     if (this.form.invalid) {
       return;
     }
 
     const payload: UserCredentials = this.form.getRawValue();
 
-    const response = await this.#authService.login(payload);
+    this.#loginFacadeService.login(payload).subscribe({
+      next: () => {
+        this.#router.navigate(['/']);
+      },
+      error: (response: HttpErrorResponse) => {
+        this.#authTokenStorageService.remove();
 
-    response
-      .pipe(
-        tap(({ token }) => this.#authTokenStorageService.set(token)),
-        switchMap(({ token }) => this.#authService.getCurrentUser(token)),
-        tap(user => this.#loggedInUserStoreService.setUser(user)),
-      )
-      .subscribe({
-        next: () => {
-          this.#router.navigate(['/']);
-        },
-        error: (response: HttpErrorResponse) => {
-          this.#authTokenStorageService.remove();
+        if (response.status === 401) {
+          this.form.setErrors({ wrongCredentials: true });
 
-          if (response.status === 401) {
-            this.form.setErrors({ wrongCredentials: true });
+          return;
+        }
 
-            return;
-          }
-
-          this.#feebackService.error('Erro ao realizar login.', 'Fechar');
-        },
-      });
+        this.#feebackService.error('Erro ao realizar login.', 'Fechar');
+      },
+    });
   }
 
   public toggleHidePassword(event: MouseEvent) {

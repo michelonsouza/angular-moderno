@@ -4,7 +4,7 @@ const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
 const SECRET = environment.NG_APP_JWT_SECRET;
-const DEFAULT_EXP = 60 * 60 * 24 * 7; // 7 days
+const DEFAULT_EXP_IN_SECONDS = 60 * 60 * 24 * 7; // 7 days in seconds
 
 // 🔹 Base64Url encode
 function base64UrlEncode(input: Uint8Array): string {
@@ -43,7 +43,7 @@ async function getKey() {
 // 🔐 Criar Token
 export async function createToken(
   payload: object,
-  expiresInSeconds = DEFAULT_EXP,
+  expiresInSeconds = DEFAULT_EXP_IN_SECONDS,
 ): Promise<string> {
   const header = {
     alg: 'HS256',
@@ -74,7 +74,9 @@ export async function createToken(
 }
 
 // ✅ Validar e Decodificar
-export async function verifyAndDecodeToken<T>(token: string): Promise<T | null> {
+export async function verifyAndDecodeToken<DataType = { email: string }>(
+  token: string,
+): Promise<DataType | null> {
   try {
     const [encodedHeader, encodedPayload, signature] = token.split('.');
     const data = `${encodedHeader}.${encodedPayload}`;
@@ -101,7 +103,7 @@ export async function verifyAndDecodeToken<T>(token: string): Promise<T | null> 
       throw new Error('expired token');
     }
 
-    return payload as T;
+    return payload as DataType;
   } catch (error) {
     console.error('JWT:', error);
     return null;

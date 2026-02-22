@@ -1,0 +1,13 @@
+@use '../variables' as vars;
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
+  padding: 0 24px;
+
+  .conainer-content {
+    width: vars.$content-width;
+    max-width: 100%;
+  }
+}

@@ -17,11 +17,11 @@ export class AuthTokenStorageService {
     return this.#localStorageToken.getItem(this.#key);
   }
 
-  remove() {
+  remove(): void {
     this.#localStorageToken.removeItem(this.#key);
   }
 
   has() {
-    return !!this.#localStorageToken.getItem(this.#key);
+    return Boolean(this.get());
   }
 }

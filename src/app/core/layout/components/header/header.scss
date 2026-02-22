@@ -1,7 +1,29 @@
+@use 'variables.scss' as vars;
+
 .header {
   background: var(--mat-sys-primary);
 
   .home-link {
+    cursor: pointer;
+  }
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .toolbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: vars.$content-width;
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  .toolbar-logout {
+    margin-left: auto;
     cursor: pointer;
   }
 }

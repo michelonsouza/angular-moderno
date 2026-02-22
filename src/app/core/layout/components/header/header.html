@@ -1,5 +1,11 @@
 <header class="header">
-  <mat-toolbar>
-    <span title="Ir para a Home" class="home-link" routerLink="/">My Application</span>
+  <mat-toolbar class="toolbar">
+    <div class="toolbar-content">
+      <span title="Ir para a Home" class="home-link" routerLink="/">Gerenciador financeiro</span>
+
+      @if (isLoggedIn()) {
+        <button matButton="filled" class="toolbar-logout" (click)="logout()">Sair</button>
+      }
+    </div>
   </mat-toolbar>
 </header>
