@@ -1,5 +1,16 @@
 <mat-card class="card">
-  <div>
+  <div class="card-header-container">
+    <ng-template [isIncome]="transaction().type" [isIncomeElse]="elseTemmplate">
+      <mat-chip-set aria-label="Tipo de transação">
+        <mat-chip selected>Ganho</mat-chip>
+      </mat-chip-set>
+    </ng-template>
+    <ng-template #elseTemmplate>
+      <mat-chip-set aria-label="Tipo de transação">
+        <mat-chip selected>Gasto</mat-chip>
+      </mat-chip-set>
+    </ng-template>
+
     <div class="card-title">
       {{ transaction().title }}
     </div>

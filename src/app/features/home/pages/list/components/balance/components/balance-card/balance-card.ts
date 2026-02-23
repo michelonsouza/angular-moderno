@@ -1,12 +1,13 @@
 import type { TransactionType } from '@shared/transaction/interfaces/transaction';
 import { Component, computed, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { CurrencyPipe } from '@angular/common';
 
 type BalanceCardCssClass = 'income' | 'outcome' | 'zero';
 
 @Component({
   selector: 'app-balance-card',
-  imports: [MatCardModule],
+  imports: [MatCardModule, CurrencyPipe],
   templateUrl: './balance-card.html',
   styleUrl: './balance-card.scss',
 })

@@ -1,5 +1,6 @@
 import { Transaction, TransactionType } from '@shared/transaction/interfaces/transaction';
 import { Component, computed, input } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 
 const classes: Record<TransactionType, string> = {
   income: 'income',
@@ -8,7 +9,7 @@ const classes: Record<TransactionType, string> = {
 };
 @Component({
   selector: 'app-transaction-value',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './transaction-value.html',
   styleUrl: './transaction-value.scss',
   host: {
