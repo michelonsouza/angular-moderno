@@ -1,11 +1,8 @@
 <header class="header">
   <mat-toolbar class="toolbar">
+    <app-toggle-sidenav-visibility />
     <div class="toolbar-content">
       <span title="Ir para a Home" class="home-link" routerLink="/">Gerenciador financeiro</span>
-
-      @if (isLoggedIn()) {
-        <button matButton="filled" class="toolbar-logout" (click)="logout()">Sair</button>
-      }
     </div>
   </mat-toolbar>
 </header>

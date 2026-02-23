@@ -1,0 +1,13 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    class="sidenav"
+    [opened]="isSidenavOpened()"
+    (closed)="closeSidenav()"
+    [mode]="sidenavMode()"
+  >
+    <app-sidenav-items />
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ng-content />
+  </mat-sidenav-content>
+</mat-sidenav-container>

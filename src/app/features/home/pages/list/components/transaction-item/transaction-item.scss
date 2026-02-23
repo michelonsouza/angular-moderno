@@ -1,11 +1,14 @@
+@use 'mixins/media-query' as mq;
+
 .card {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 16px;
+  gap: 8px;
 
-  @media (max-width: 720px) {
-    flex-direction: column;
-    gap: 8px;
+  @include mq.media-query(md) {
+    flex-direction: row;
+    gap: 0px;
   }
 
   .card-header-container {
