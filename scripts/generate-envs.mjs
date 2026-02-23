@@ -9,7 +9,7 @@ function getProjectEnvs() {
   return Object.fromEntries(projectEnvs);
 }
 
-const __dirname = process.cwd();;
+const __dirname = process.cwd();
 
 const environmentsFolderPath = path.resolve(path.join(__dirname, 'src', 'environments'));
 const developEnvPath = path.resolve(path.join(environmentsFolderPath, 'environment.development.ts'));

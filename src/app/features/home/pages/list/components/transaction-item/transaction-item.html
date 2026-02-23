@@ -8,7 +8,9 @@
     </div>
   </div>
   <div class="card-actions">
-    <button class="btn-error" matButton="filled" (click)="remove.emit(transaction())">Remover</button>
+    <button matButton="filled" matButtonColor="error" (click)="remove.emit(transaction())">
+      Remover
+    </button>
     <button matButton="filled" (click)="edit.emit(transaction())">Editar</button>
   </div>
 </mat-card>
