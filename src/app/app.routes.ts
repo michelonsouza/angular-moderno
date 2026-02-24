@@ -7,7 +7,16 @@ export const routes: Routes = [
     path: '',
     canActivate: [isAuthenticatedGuard],
     loadComponent: () => import('./core/layout/layout'),
-    loadChildren: () => import('./features/home/routes'),
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./features/home/routes'),
+      },
+      {
+        path: 'transactions',
+        loadChildren: () => import('./features/transactions/routes'),
+      },
+    ],
   },
   {
     path: 'auth',

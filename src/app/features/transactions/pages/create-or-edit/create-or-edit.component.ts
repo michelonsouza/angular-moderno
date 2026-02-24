@@ -11,7 +11,7 @@ import {
   TransactionPayload,
   TransactionType,
 } from '@shared/transaction/interfaces/transaction';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackService } from '@shared/feedback/services/feedback.service';
 import { tap } from 'rxjs';
 import { CustomFormFieldDirective } from '@/app/shared/material/form-field/directives/custom-form-field.directive';
@@ -35,6 +35,7 @@ export class CreateOrEditComponent {
   readonly #transactionsService = inject(TransactionsService);
   readonly #router = inject(Router);
   readonly #feedbackService = inject(FeedbackService);
+  readonly #activatedRoute = inject(ActivatedRoute);
 
   protected readonly transaction = input<Transaction | null>();
 
@@ -76,7 +77,9 @@ export class CreateOrEditComponent {
 
     this.#createOrEdit(payload).subscribe({
       next: () => {
-        this.#router.navigate(['/']);
+        this.#router.navigate(['../../'], {
+          relativeTo: this.#activatedRoute,
+        });
       },
       complete: () => {
         this.submitLoading.set(false);

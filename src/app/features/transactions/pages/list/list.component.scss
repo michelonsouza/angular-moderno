@@ -1,0 +1,42 @@
+@use 'mixins/media-query' as mq;
+
+.transactions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+  // align-items: center;
+  // justify-content: space-between;
+
+  .search {
+    width: 100%;
+    order: 2,
+  }
+
+  .add-transaction {
+    order: 1;
+  }
+
+  @include mq.media-query(md) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .search {
+      width: unset;
+      order: 1;
+    }
+
+    .add-transaction {
+      order: 2;
+      margin-top: -16px;
+    }
+  }
+}
