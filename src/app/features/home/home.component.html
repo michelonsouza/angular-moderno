@@ -1,1 +1,32 @@
 <app-balance [transactions]="transactions()" />
+
+<div class="chart-container">
+  <mat-card class="card">
+    <mat-card-content>
+      @defer (when canLoadComponent(); on interaction(interactionClick)) {
+        <app-pie-chart [config]="chartConfig()" />
+      } @loading (minimum 1s) {
+        <div class="loading-container">
+          <mat-spinner color="primary"></mat-spinner>
+        </div>
+      } @placeholder (minimum 1s) {
+        <button matButton="filled" type="button">Clique inválido</button>
+        <button matButton="filled" type="button" #interactionClick>
+          Clique usando interaction
+        </button>
+        <button matButton="filled" type="button" (click)="canLoadComponent.set(true)">
+          Clique usando when
+        </button>
+      } @error {
+        <div class="error-container">
+          <p>
+            <mat-icon>error</mat-icon>
+            O componente não foi carregado corretamente!
+            <br />
+            Verifique sua conexão de internet e tente novamente.
+          </p>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,30 @@
+.chart-container {
+  margin-top: 24px;
+}
+
+.card {
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    .loading-container,
+    .error-container {
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      &>p {
+        color: var(--mat-sys-error);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  }
+}
