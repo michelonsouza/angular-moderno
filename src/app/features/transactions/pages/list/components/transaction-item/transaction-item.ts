@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -23,6 +23,7 @@ import { IsIncomeDirective } from './directives/is-income.directive';
   host: {
     '[attr.data-transaction]': 'transaction().id',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionItem {
   public readonly transaction = input.required<Transaction>();

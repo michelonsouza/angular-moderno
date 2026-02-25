@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { SidenavItemsComponent } from './components/sidenav-items/sidenav-items.component';
@@ -10,6 +10,7 @@ import { SidenavVisibilityStore } from '../../stores/sidenav-visibility.store';
   imports: [MatSidenavModule, SidenavItemsComponent],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidenavComponent {
   readonly #mobileLayoutService = inject(MobileLayoutService);

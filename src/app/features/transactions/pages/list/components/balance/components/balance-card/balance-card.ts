@@ -1,5 +1,5 @@
 import type { TransactionType } from '@shared/transaction/interfaces/transaction';
-import { Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { HumanizeCurrencyPipe } from './pipes/humanize-currency-pipe';
 
@@ -10,6 +10,7 @@ type BalanceCardCssClass = 'income' | 'outcome' | 'zero';
   imports: [MatCardModule, HumanizeCurrencyPipe],
   templateUrl: './balance-card.html',
   styleUrl: './balance-card.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BalanceCard {
   public readonly type = input.required<TransactionType>();

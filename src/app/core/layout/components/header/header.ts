@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 
@@ -8,5 +8,6 @@ import { ToggleSidenavVisibilityComponent } from './components/toggle-sidenav-vi
   imports: [MatToolbarModule, RouterLink, ToggleSidenavVisibilityComponent],
   templateUrl: './header.html',
   styleUrl: './header.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {}

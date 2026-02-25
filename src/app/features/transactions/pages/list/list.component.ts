@@ -1,5 +1,12 @@
 import { MatButtonModule } from '@angular/material/button';
-import { Component, computed, inject, Signal, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  Signal,
+  signal,
+} from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { ConfirmationDialogService } from '@shared/dialog/confirmation/services/confirmation-dialog.service';
@@ -34,6 +41,7 @@ function typingDelay<DataType>(signal: Signal<DataType>, delay = 500): Signal<Da
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent {
   readonly #feedbackService = inject(FeedbackService);
