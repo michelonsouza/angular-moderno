@@ -2,12 +2,26 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.15.
 
+## Before start developer
+
+Copy `.env.example` and paste it.
+
+Change to `.env`.
+
+Set `variables` as you like.
+
 ## Development server
 
 To start a local development server, run:
 
 ```bash
-ng serve
+npm start
+```
+
+or
+
+```bash
+yarn start
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
@@ -42,14 +56,6 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 
 ```bash
 ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
 ```
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
